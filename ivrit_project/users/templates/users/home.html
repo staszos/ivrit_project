@@ -1,0 +1,53 @@
+{% extends "users/base.html" %}
+{% block title %} Home Page {% endblock title%}
+{% block content %}
+    <div class="jumbotron">
+        <h1 class="display-4">Добро пожаловать! {{user.first_name.title|default:''}}</h1>
+        {% if user.is_authenticated %}
+
+        <p class="lead">
+            Вы вошли в аккаунт! 
+        </p>
+
+
+        <p>Ниже приведен список всех уроков</p> 
+        <a href="{% url 'lesson1' %}"><button class ='btn btn-info'>Первый Урок</button></a>
+        <a href="{% url 'lesson1' %}"><button class ='btn btn-info'>Второй Урок</button></a>
+        <a href="{% url 'lesson1' %}"><button class ='btn btn-info'>Третий Урок</button></a>
+        <a href="{% url 'lesson1' %}"><button class ='btn btn-info'>Четвертый Урок</button></a>
+
+
+
+
+        {% else %}
+        <p class="lead">
+            Пожалуйста, войдите в ваш аккаунт, чтобы увидеть доступные вам уроки. 
+        </p>
+       
+        {% endif %}
+        <hr class="my-4">
+        <p class="lead">
+            {% if user.is_authenticated %}
+
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary btn-lg">Выйти</button>
+            </form>
+
+          
+
+            {% else %}
+                <a class="btn btn-primary btn-lg" href="{% url 'login' %}" role="button">Войти</a>
+                <a class="btn btn-primary btn-lg" href="{% url 'users-register' %}" role="button">Регистрация</a>
+            {% endif %}
+            
+        </p>
+    </div>
+
+{% endblock content %}
+
+
+
+
+
+
